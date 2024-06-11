@@ -1,13 +1,17 @@
 const express = require("express");
-
 const connectDB = require("./config/db");
-
 const app = express();
 
 // Connect to database
 connectDB();
 
-app.get("/", (req, res) => res.send("API running"));
+// Middleware
+//app.use(cors());
+app.use(express.json({ extended: false }));
+
+// Define routes
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 const PORT = process.env.PORT || 5050;
 
