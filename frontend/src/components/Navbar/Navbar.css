@@ -1,0 +1,44 @@
+
+  
+  #headerSmall {
+    background-color: #121212;
+    background-image: url(../../assets/notime_logo.png); 
+    background-repeat: no-repeat;
+    height: 36px;
+    background-size: 179px 32px;
+    
+  }
+  
+  #header-menu {
+    position: absolute;
+    right: 0;
+    top: 11px;
+    z-index: 200;
+    padding-right: 20px;
+  }
+  
+  #header-menu .header-menu-login .btn-login,
+  #header-menu .header-menu-login .btn-signup {
+    border-radius: 2px;
+    display: inline-block;
+    font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 100%;
+    margin-left: 8px;
+    min-width: 90px;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    border: none !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #header-menu .header-menu-login .btn-login {
+    background-color: #414141 !important;
+  }
+  
+  #header-menu .header-menu-login .btn-signup {
+    background-color: #4065ba !important;
+  }
+  
