@@ -1,34 +1,41 @@
 body {
-    background-color: #232124;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjEBIS+g8AAaYBNjSQkJMAAAAASUVORK5CYII=);
-    background-size: 1px 48px;
-    background-repeat: repeat-x;
-    margin: 0;
-    padding: 0;
-    font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
-  }
+  background-color: #420563;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjEBIS+g8AAaYBNjSQkJMAAAAASUVORK5CYII=);
+  background-size: 1px 48px;
+  background-repeat: repeat-x;
+  margin: 0;
+  padding: 0;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+}
+.navbar-container {
+  width: 80%; /* Adjust the width to control the size of the container */
+  max-width: 1200px; /* Ensure it doesn't get too wide on large screens */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+}
+.btn-login,
+.btn-signup {
+  border-radius: 2px;
+  display: inline-block;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-left: 8px;
+  min-width: 90px;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  border: none !important;
+  color: #e0e0e0 !important;
+}
 
-  .btn-login,
-  .btn-signup {
-    border-radius: 2px;
-    display: inline-block;
-    font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 100%;
-    margin-left: 8px;
-    min-width: 90px;
-    padding: 4px 8px;
-    text-align: center;
-    text-decoration: none;
-    border: none !important;
-    color: #e0e0e0 !important;
-  }
+.btn-login {
+  background-color: #414141 !important;
+}
 
-  .btn-login {
-    background-color: #414141 !important;
-  }
-  
-   .btn-signup {
-    background-color: #4065ba !important;
-  }
+.btn-signup {
+  background-color: #4065ba !important;
+}

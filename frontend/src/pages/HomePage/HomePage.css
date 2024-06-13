@@ -1,39 +1,45 @@
+.navbar-container {
+  width: 80%; /* Adjust the width to control the size of the container */
+  max-width: 1200px; /* Ensure it doesn't get too wide on large screens */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .home {
-    display: flex;
-    justify-content: center;
-   
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-  }
-  
-  .dark-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border: 1px solid #000;
-  }
-  
-  .home-inner {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border: 1px solid #000;
-  }
-  
-  .x-large {
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  
-  .lead {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  
+  display: flex;
+
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+.home-inner {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+.x-large {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.lead {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
