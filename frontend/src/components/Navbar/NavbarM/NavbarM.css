@@ -1,0 +1,58 @@
+body:not(.ownlist) {
+  background: transparent;
+  background-color: #121212;
+  font-family: Verdana, Arial;
+  font-size: 11px;
+  margin: 0;
+  text-align: center;
+}
+
+#menu {
+  background-color: #2e51a2;
+  height: 34px;
+  width: 1200px;
+}
+
+#nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#nav li {
+  display: block;
+  float: left;
+  position: relative;
+  text-indent: 5px;
+  width: 100px;
+  z-index: 90;
+}
+#nav li.small {
+  width: 70px;
+}
+#nav li.small2 {
+  width: 80px;
+}
+#nav li.smaller {
+  width: 60px;
+}
+#nav li a {
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  height: 24px;
+  padding: 10px 5px 0;
+  text-align: left;
+  text-decoration: none;
+}
+#nav ul {
+  display: none;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+}
+#nav ul li {
+  float: left;
+  width: 105px;
+}

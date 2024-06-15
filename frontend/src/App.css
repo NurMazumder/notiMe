@@ -1,20 +1,12 @@
 body {
-  background-color: #420563;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjEBIS+g8AAaYBNjSQkJMAAAAASUVORK5CYII=);
+  background-color: #252227;
   background-size: 1px 48px;
   background-repeat: repeat-x;
   margin: 0;
   padding: 0;
   font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
 }
-.navbar-container {
-  width: 80%; /* Adjust the width to control the size of the container */
-  max-width: 1200px; /* Ensure it doesn't get too wide on large screens */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-}
+
 .btn-login,
 .btn-signup {
   border-radius: 2px;

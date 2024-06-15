@@ -1,10 +1,11 @@
 import React from "react";
-import "./HomePage.css";
 import { Link } from "react-router-dom";
+import Container from "../../components/Navbar/Container/Container";
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <div className="navbar-container">
+    <Container>
       <section className="home">
         <div className="dark-overlay">
           <div className="home-inner">
@@ -30,7 +31,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-    </div>
+    </Container>
   );
 };
 
