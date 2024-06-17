@@ -2,9 +2,8 @@
   display: flex;
   align-items: flex-start; /* Align items at the top */
   justify-content: center;
-  width: 100%;
-
   padding: 10px 0px;
+  width: 100%;
 }
 
 .dark-overlay {

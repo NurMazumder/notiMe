@@ -1,6 +1,6 @@
 import React from "react";
 import "./NavbarM.css";
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
 
 const NavbarM = () => {
   return (

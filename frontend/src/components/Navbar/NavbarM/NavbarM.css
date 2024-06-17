@@ -1,6 +1,4 @@
 body:not(.ownlist) {
-  background: transparent;
-  background-color: #121212;
   font-family: Verdana, Arial;
   font-size: 11px;
   margin: 0;
