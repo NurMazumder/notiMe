@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
+import Container from "../Container/Container";
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -28,7 +29,7 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <div className="auth-background">
       <div className="form-wrapper">
-        <h2>Sign In</h2>
+        <h2 className="form-title">Sign In</h2>
         <form onSubmit={onSubmit} className="form">
           <div className="form-control">
             <input
@@ -55,7 +56,7 @@ const Login = ({ login, isAuthenticated }) => {
             Sign In
           </button>
         </form>
-        <p>
+        <p className="form-footer">
           Don't Have an Account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>

@@ -32,7 +32,19 @@
   color: #fff;
 }
 
-.buttons .btn-login,
-.buttons .btn-signup {
-  margin: 0 10px;
+.btn-demo {
+  border-radius: 2px;
+  display: inline-block;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-left: 8px;
+  min-width: 90px;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  border: none !important;
+  color: #e0e0e0 !important;
+  background-color: #066846 !important;
 }

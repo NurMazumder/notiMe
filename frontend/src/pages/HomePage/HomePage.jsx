@@ -22,11 +22,8 @@ const HomePage = () => {
                 your favorite stories again.
               </p>
               <div className="buttons">
-                <Link to="/login" className="btn-login">
-                  Login
-                </Link>
-                <Link to="/signup" className="btn-signup">
-                  Sign Up
+                <Link to="/demo" className="btn-demo">
+                  Demo
                 </Link>
               </div>
             </div>

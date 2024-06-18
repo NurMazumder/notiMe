@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-//import "./Auth.css";
+import "./Auth.css";
 import { Link, useNavigate } from "react-router-dom"; // Updated import
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
+import Container from "../Container/Container";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -34,10 +35,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <div className="auth-background">
       <div className="form-wrapper">
-        <h2>Sign Up</h2>
+        <h2 className="form-title">Sign Up</h2>
         <form onSubmit={onSubmit} className="form">
           <div className="form-control">
-            <input type="text" name="name" value={name} onChange={onChange} />
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={onChange}
+              className="inputtext login-inputtext"
+            />
             <label>Name</label>
           </div>
           <div className="form-control">
@@ -46,6 +53,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               name="email"
               value={email}
               onChange={onChange}
+              className="inputtext login-inputtext"
             />
             <label>Email</label>
           </div>
@@ -55,15 +63,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               value={password}
               onChange={onChange}
               name="password"
+              className="inputtext login-inputtext"
             />
             <label>Password</label>
           </div>
-          <button type="submit" className="button">
+          <button type="submit" className="button btn-form-submit">
             Sign Up
           </button>
         </form>
-        <p>
-          Already Have an Account? <Link to="/login"> Login</Link>
+        <p className="form-footer">
+          Already Have an Account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>

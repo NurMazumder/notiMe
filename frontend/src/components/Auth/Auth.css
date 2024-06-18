@@ -1,135 +1,85 @@
-.auth-background::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: url("../../assets/Signup.jpg") no-repeat center center/cover;
-  background-position: center;
-  z-index: -1;
+/* Background styling for authentication section */
+.auth-background {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  min-height: 100vh;
 }
 
+/* Wrapper for the form */
 .form-wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 4px;
-  padding: 30px;
-  width: 450px;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.75);
+  background-color: #222;
+  border: 10px solid #353535;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  margin-top: 40px; /* Add margin-top to push the form down */
 }
 
-.form-wrapper h2 {
-  color: #fff;
-  font-size: 2rem;
+/* Form title styling */
+.form-title {
+  color: #e0e0e0;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px; /* Increase margin-bottom for space */
 }
 
-.form-wrapper form {
-  margin: 25px 0 65px;
-}
-
-form .form-control {
-  height: 50px;
+/* Wrapper for form controls */
+.form-control {
+  margin-bottom: 30px; /* Increase margin-bottom for space between controls */
   position: relative;
-  margin-bottom: 16px;
 }
 
+/* Input field styling */
 .form-control input {
-  height: 100%;
-  width: 100%;
-  background: #333;
-  border: none;
-  outline: none;
+  width: calc(100% - 22px); /* Adjust width to fit inside the container */
+  padding: 10px;
+  border: 1px solid #353535;
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 16px;
   border-radius: 4px;
-  color: #fff;
-  font-size: 1rem;
-  padding: 0 20px;
+  margin-left: 10px; /* Align input within the form control */
 }
 
-.form-control input:is(:focus, :valid) {
-  background: #444;
-  padding: 16px 20px 0;
-}
-
+/* Label styling */
 .form-control label {
   position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  pointer-events: none;
-  color: #8c8c8c;
-  transition: all 0.1s ease;
+  top: -20px;
+  left: 10px;
+  font-size: 14px;
+  color: #abc4ed;
 }
 
-.form-control input:is(:focus, :valid) ~ label {
-  font-size: 0.75rem;
-  transform: translateY(-130%);
-}
-
-.form .button {
-  width: 100%;
-  padding: 16px 0;
-  font-size: 1rem;
-  background: #0707e7;
-  color: #fff;
-  font-weight: 500;
-  border-radius: 4px;
+/* Button styling */
+.button {
+  background-color: #4065ba;
   border: none;
-  outline: none;
-  margin: 25px 0 10px;
-  cursor: pointer;
-  transition: 0.1s ease;
-}
-
-form button:hover {
-  background: #000080;
-}
-
-.form-wrapper a:hover {
-  text-decoration: underline;
-}
-
-.form-wrapper :where(label, p, small, a) {
-  color: #b3b3b3;
-}
-
-.form-wrapper p a {
   color: #fff;
-}
-
-.form-wrapper small {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
   display: block;
-  margin-top: 15px;
-  color: #b3b3b3;
+  width: 100%; /* Align button with input width */
+  margin-left: 10px; /* Align button within the form control */
 }
 
-.form-wrapper small a {
-  color: #0071eb;
+/* Footer of the form */
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #e0e0e0;
 }
-/* do we really need this? */
-@media (max-width: 740px) {
-  .body::before {
-    display: none;
-  }
 
-  nav,
-  .form-wrapper {
-    padding: 20px;
-  }
+/* Links in the form footer */
+.form-footer a {
+  color: #1c439b;
+  text-decoration: none;
+}
 
-  nav a img {
-    width: 140px;
-  }
-
-  .form-wrapper {
-    width: 100%;
-    top: 43%;
-  }
-
-  .form-wrapper form {
-    margin: 25px 0 40px;
-  }
+.form-footer a:hover {
+  text-decoration: underline;
 }
