@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./actions/setAuthToken";
 import Container from "./components/Container/Container";
+import Alert from "./components/Alert/Alert";
 
 import "./App.css";
 
@@ -28,12 +29,14 @@ const App = () => {
         <>
           <Navbar />
           <NavbarM />
-
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-          </Routes>
+          <section>
+            <Alert />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Register />} />
+            </Routes>
+          </section>
         </>
       </Router>
     </Provider>

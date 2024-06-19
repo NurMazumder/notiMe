@@ -1,39 +1,38 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./NavbarM.css";
 import Container from "../../Container/Container";
 
 const NavbarM = () => {
   return (
     <Container>
-      <div id="menu" class="snipcss-FKjpQ">
+      <div id="menu" className="snipcss-FKjpQ">
         <div id="menu_left">
-          <ul id="nav" class="js-color-pc-constant color-pc-constant">
-            <li class="small">
-              <a href="#" class="non-link">
+          <ul id="nav" className="js-color-pc-constant color-pc-constant">
+            <li className="small">
+              <Link to="/anime" className="non-link">
                 Anime
-              </a>
+              </Link>
             </li>
-            <li class="small">
-              <a href="#" class="non-link">
+            <li className="small">
+              <Link to="/manga" className="non-link">
                 Manga
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" class="non-link">
+              <Link to="/manhwa" className="non-link">
                 Manhwa
-              </a>
+              </Link>
             </li>
-
-            <li class="small">
-              <a href="#" class="non-link">
+            <li className="small">
+              <Link to="/novel" className="non-link">
                 Novel
-              </a>
+              </Link>
             </li>
-
-            <li class="smaller">
-              <a href="#" class="non-link">
+            <li className="smaller">
+              <Link to="/request" className="non-link">
                 Request
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
