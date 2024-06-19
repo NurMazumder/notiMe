@@ -11,6 +11,7 @@ import { loadUser } from "./actions/auth";
 import setAuthToken from "./actions/setAuthToken";
 import Container from "./components/Container/Container";
 import Alert from "./components/Alert/Alert";
+import Demo from "./pages/Demo/Demo";
 
 import "./App.css";
 
@@ -35,6 +36,7 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Register />} />
+              <Route path="/demo" element={<Demo />} />
             </Routes>
           </section>
         </>

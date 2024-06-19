@@ -1,0 +1,60 @@
+.demo-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.demo-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.demo-form {
+  margin: 20px;
+}
+
+.demo-input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.demo-button {
+  padding: 10px;
+}
+
+.demo-loading {
+  margin-top: 20px;
+}
+
+.demo-error {
+  margin-top: 20px;
+  color: red;
+}
+
+.demo-results {
+  margin-top: 20px;
+}
+
+.demo-results-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.demo-chapters-list {
+  list-style: none;
+  padding: 0;
+}
+
+.demo-chapter-item {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.demo-chapter-title,
+.demo-chapter-number,
+.demo-chapter-date,
+.demo-chapter-link {
+  margin: 5px 0;
+}

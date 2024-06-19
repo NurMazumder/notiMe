@@ -2,24 +2,61 @@ const mongoose = require("mongoose");
 
 const ReadSchema = new mongoose.Schema({
   chapter1: {
-    type: String,
+    content: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+    releaseDate: {
+      type: String,
+    },
   },
   chapter2: {
-    type: String,
+    content: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+    releaseDate: {
+      type: String,
+    },
   },
   chapter3: {
-    type: String,
+    content: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+    releaseDate: {
+      type: String,
+    },
   },
   chapter4: {
-    type: String,
+    content: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+    releaseDate: {
+      type: String,
+    },
   },
   chapter5: {
-    type: String,
+    content: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+    releaseDate: {
+      type: String,
+    },
   },
   title: {
-    type: String,
-  },
-  releaseDate: {
     type: String,
   },
   from: {
@@ -28,6 +65,9 @@ const ReadSchema = new mongoose.Schema({
   noti: {
     type: Boolean,
   },
+  URL: {
+    type: String,
+  },
 });
 
-module.exports = User = mongoose.model("Read", ReadSchema);
+module.exports = Read = mongoose.model("Read", ReadSchema);
