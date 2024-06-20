@@ -3,6 +3,8 @@ import {
   SCRAPE_FAIL,
   FETCH_SCRAPED_DATA_SUCCESS,
   FETCH_SCRAPED_DATA_FAIL,
+  SCRAPE_REQUEST,
+  FETCH_SCRAPED_DATA_REQUEST,
 } from "../actions/constants";
 
 const initialState = {
@@ -17,6 +19,12 @@ export default function demoReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case SCRAPE_REQUEST:
+    case FETCH_SCRAPED_DATA_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case SCRAPE_SUCCESS:
       return {
         ...state,

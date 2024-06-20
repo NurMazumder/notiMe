@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { scrapeWebsite } from "../../actions/demo";
 import "./Demo.css";
 import Container from "../../components/Container/Container";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner.jsx";
 
 const Demo = () => {
   const [url, setUrl] = useState("");
@@ -38,7 +41,7 @@ const Demo = () => {
           <div className="home-inner">
             <h1 className="x-large">Demo</h1>
             <p className="lead">
-              This demo showcases our ability to scrape the latest manga
+              This demo showcases our ability to scrape the latest manhwa
               chapters from{" "}
               <a
                 href="https://asuracomic.net/"
@@ -47,10 +50,22 @@ const Demo = () => {
               >
                 AsuraScans
               </a>
-              , save them to our database, and keep the information updated
-              periodically. Head over to AsuraScans to select your favorite
-              manga to read. Sign up to save your favorites and get notified of
-              new releases.
+              , save them to our database, and where we keep the information
+              updated periodically, so you have the latest chapters. Head over
+              to{" "}
+              <a
+                href="https://asuracomic.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                AsuraScans
+              </a>{" "}
+              to select your favorite manhwa and copy the URL to demo the
+              scrape.{" "}
+              <Link to="/signup" rel="noopener noreferrer">
+                SIGN UP
+              </Link>{" "}
+              to save your favorites and get notified of new releases.
             </p>
             <form onSubmit={handleSubmit}>
               <input
@@ -64,7 +79,8 @@ const Demo = () => {
                 Scrape
               </button>
             </form>
-            {loading && <p className="lead">Loading...</p>}
+            {loading && <LoadingSpinner />}{" "}
+            {/* Render the spinner when loading */}
             {error && <p className="lead">{error}</p>}
             {chapters && Object.keys(chapters).length > 0 && (
               <div className="demo-results">

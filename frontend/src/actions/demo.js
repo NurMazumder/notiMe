@@ -5,11 +5,15 @@ import {
   SCRAPE_FAIL,
   FETCH_SCRAPED_DATA_SUCCESS,
   FETCH_SCRAPED_DATA_FAIL,
+  SCRAPE_REQUEST,
+  FETCH_SCRAPED_DATA_REQUEST,
 } from "./constants";
 
 // Scrape website and save to DB
 export const scrapeWebsite = (url) => async (dispatch) => {
   try {
+    dispatch({ type: SCRAPE_REQUEST });
+
     await axios.post("/api/scrape", { url });
 
     dispatch({
@@ -30,6 +34,8 @@ export const scrapeWebsite = (url) => async (dispatch) => {
 // Fetch scraped data from DB
 export const fetchScrapedData = (url) => async (dispatch) => {
   try {
+    dispatch({ type: FETCH_SCRAPED_DATA_REQUEST });
+
     const res = await axios.get("/api/scrape", { params: { url } });
 
     dispatch({
