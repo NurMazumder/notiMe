@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const scheduleScrapes = require("./update/demo/AsuraDemo");
 const app = express();
 
 // Connect to database
@@ -17,3 +18,6 @@ app.use("/api/scrape", require("./routes/api/scrape"));
 const PORT = process.env.PORT || 5050;
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
+
+// Start the scheduled scraping task
+scheduleScrapes();

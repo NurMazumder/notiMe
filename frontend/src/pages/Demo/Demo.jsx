@@ -1,36 +1,20 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { scrapeWebsite } from "../../actions/demo";
 import "./Demo.css";
 
 const Demo = () => {
   const [url, setUrl] = useState("");
-  const [chapters, setChapters] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { chapters, loading, error } = useSelector((state) => state.demo);
 
   const handleChange = (e) => {
     setUrl(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.post("/api/scrape", { url });
-      setChapters([
-        response.data.chapter1,
-        response.data.chapter2,
-        response.data.chapter3,
-        response.data.chapter4,
-        response.data.chapter5,
-      ]);
-      setLoading(false);
-    } catch (err) {
-      setError(err.response ? err.response.data.error : err.message);
-      setLoading(false);
-    }
+    dispatch(scrapeWebsite(url));
   };
 
   return (
