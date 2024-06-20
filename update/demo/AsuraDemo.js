@@ -23,6 +23,7 @@ const scrapeAndUpdate = async (url) => {
         from: data.from,
         noti: data.noti,
         URL: data.URL,
+        imgURL: data.imgURL,
       },
       { new: true, upsert: true }
     );
@@ -46,9 +47,9 @@ const scrapeAllUrls = async () => {
   }
 };
 
-// Schedule task to run every 2 minutes
+// Schedule task to run every day
 const scheduleScrapes = () => {
-  cron.schedule("*/2 * * * *", () => {
+  cron.schedule("0 0 * * *", () => {
     console.log("Running scheduled scrape...");
     scrapeAllUrls();
   });

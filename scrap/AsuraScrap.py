@@ -5,7 +5,6 @@ import sys
 
 def scrape(url):
     # Make a GET request to fetch the raw HTML content
-   
     response = requests.get(url)
     html_content = response.content
 
@@ -25,6 +24,7 @@ def scrape(url):
             chapter_info['link'] = link_tag['href']
             chapter_info['chapter_number'] = link_tag.find('span', class_='chapternum').text.strip()
             chapter_info['release_date'] = link_tag.find('span', class_='chapterdate').text.strip()
+            chapter_info['img_url'] = soup.find('div', class_='thumb').find('img')['src']  
             chapters.append(chapter_info)
 
         return chapters

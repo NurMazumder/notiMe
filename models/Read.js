@@ -68,6 +68,9 @@ const ReadSchema = new mongoose.Schema({
   URL: {
     type: String,
   },
+  imgURL: {
+    type: String,
+  },
 });
 
 module.exports = Read = mongoose.model("Read", ReadSchema);
