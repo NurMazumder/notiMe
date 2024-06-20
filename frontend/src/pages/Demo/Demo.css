@@ -1,73 +1,99 @@
-.demo-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.demo-title {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.demo-form {
+.home {
   display: flex;
+  align-items: flex-start;
   justify-content: center;
+  padding: 10px 0px;
+  width: 100%;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border: 1px solid #000;
+  margin-top: 20px;
+}
+
+.home-inner {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border: 1px solid #000;
+}
+
+.x-large {
+  font-size: 32px;
   margin-bottom: 20px;
+  color: #fff;
+}
+
+.lead {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.lead a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.lead a:hover {
+  text-decoration: underline;
 }
 
 .demo-input {
   padding: 10px;
-  width: 70%;
-  margin-right: 10px;
+  margin: 10px 0;
+  width: 80%;
 }
 
-.demo-button {
-  padding: 10px;
+.btn-demo {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
-.demo-loading,
-.demo-error {
-  text-align: center;
-  color: red;
+.btn-demo:hover {
+  background-color: #45a049;
 }
 
 .demo-results {
   margin-top: 20px;
 }
 
-.demo-results-title {
-  text-align: center;
-  margin-bottom: 20px;
+.accordion {
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white; /* Add a white border */
 }
 
-.demo-chapter-image {
-  display: block;
-  max-width: 100%;
-  margin: 0 auto 20px;
-  height: auto;
-}
-
-.demo-chapters-list {
-  list-style: none;
-  padding: 0;
-}
-
-.demo-chapter-item {
+.accordion-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.accordion-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.accordion-content {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion-item {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.demo-chapter-info {
-  flex: 1;
-}
-
-.demo-chapter-title,
-.demo-chapter-number,
-.demo-chapter-date,
-.demo-chapter-link {
-  margin: 5px 0;
+.accordion-item-info {
+  display: flex;
+  justify-content: space-between;
 }
