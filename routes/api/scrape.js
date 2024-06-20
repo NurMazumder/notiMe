@@ -48,6 +48,8 @@ router.post("/", async (req, res) => {
       const chapters = await runPythonScript(url);
       console.log(`Scraped data: ${JSON.stringify(chapters, null, 2)}`);
 
+      const cleanedTitle = chapters[0].title.replace("Chapter", "").trim(); // Clean title
+
       existingEntry.chapter1 = {
         content: chapters[0].chapter_number,
         url: chapters[0].link,
@@ -73,9 +75,10 @@ router.post("/", async (req, res) => {
         url: chapters[4].link,
         releaseDate: chapters[4].release_date,
       };
-      existingEntry.title = chapters[0].title;
+      existingEntry.title = cleanedTitle;
       existingEntry.from = "source";
       existingEntry.noti = false;
+      existingEntry.imgURL = chapters[0].img_url;
 
       const updatedRead = await existingEntry.save();
       return res.json(updatedRead);
@@ -84,6 +87,8 @@ router.post("/", async (req, res) => {
     // If not, scrape the website and save the data
     const chapters = await runPythonScript(url);
     console.log(`Scraped data: ${JSON.stringify(chapters, null, 2)}`);
+
+    const cleanedTitle = chapters[0].title.replace("Chapter", "").trim(); // Clean title
 
     const newRead = new Read({
       chapter1: {
@@ -111,10 +116,11 @@ router.post("/", async (req, res) => {
         url: chapters[4].link,
         releaseDate: chapters[4].release_date,
       },
-      title: chapters[0].title,
+      title: cleanedTitle,
       from: "source",
       noti: false,
       URL: url,
+      imgURL: chapters[0].img_url,
     });
 
     const savedRead = await newRead.save();

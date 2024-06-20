@@ -6,7 +6,9 @@ import {
 } from "../actions/constants";
 
 const initialState = {
-  chapters: [],
+  chapters: {},
+  imgURL: "",
+  title: "",
   loading: false,
   error: null,
 };
@@ -30,13 +32,15 @@ export default function demoReducer(state = initialState, action) {
     case FETCH_SCRAPED_DATA_SUCCESS:
       return {
         ...state,
-        chapters: [
-          payload.chapter1,
-          payload.chapter2,
-          payload.chapter3,
-          payload.chapter4,
-          payload.chapter5,
-        ],
+        chapters: {
+          chapter1: payload.chapter1,
+          chapter2: payload.chapter2,
+          chapter3: payload.chapter3,
+          chapter4: payload.chapter4,
+          chapter5: payload.chapter5,
+        },
+        imgURL: payload.imgURL,
+        title: payload.title,
         loading: false,
         error: null,
       };
