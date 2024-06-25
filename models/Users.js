@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  bookmark: [
+    {
+      type: String,
+    },
+  ],
 });
 
-module.exports = User = mongoose.model("User", UserSchema);
+module.exports = User = mongoose.model("Users", UserSchema);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { setAlert } from "../../actions/alert";
 import { scrapeWebsite } from "../../actions/demo";
 import "./Demo.css";
 import Container from "../../components/Container/Container";
@@ -14,6 +14,8 @@ const Demo = () => {
   const { chapters, imgURL, title, loading, error } = useSelector(
     (state) => state.demo
   );
+  const alert = useSelector((state) => state.alert);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Assuming you have an auth slice in your state
 
   const handleChange = (e) => {
     setUrl(e.target.value);
@@ -28,6 +30,39 @@ const Demo = () => {
 
   const handleAccordionClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleAddToBookmark = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        dispatch(
+          setAlert("User must be logged in to add bookmarks.", "warning")
+        );
+        return;
+      }
+
+      const response = await fetch("/api/bookmark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({ readId: title }), // Assuming `title` is the id
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch(setAlert("Added to bookmark successfully!", "success"));
+      } else {
+        dispatch(setAlert(data.msg || "Failed to add to bookmark.", "warning"));
+      }
+    } catch (error) {
+      console.error("Error adding to bookmark:", error);
+      dispatch(setAlert("Failed to add to bookmark", "danger"));
+    }
   };
 
   useEffect(() => {
@@ -99,6 +134,28 @@ const Demo = () => {
                       }}
                     />
                     <h2 className="lead">{title}</h2>
+                    {isAuthenticated ? (
+                      <button
+                        onClick={handleAddToBookmark}
+                        className="btn-bookmark"
+                      >
+                        Add to Bookmark
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          dispatch(
+                            setAlert(
+                              "Please log in to add bookmarks.",
+                              "warning"
+                            )
+                          )
+                        }
+                        className="btn-bookmark"
+                      >
+                        +
+                      </button>
+                    )}
                   </div>
                   {isOpen && (
                     <ul className="accordion-content">
@@ -128,6 +185,7 @@ const Demo = () => {
                 </div>
               </div>
             )}
+            {alert && <p className={`alert ${alert.type}`}>{alert.message}</p>}
           </div>
         </div>
       </section>

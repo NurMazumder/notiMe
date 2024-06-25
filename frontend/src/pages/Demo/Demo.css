@@ -63,3 +63,18 @@
   display: flex;
   justify-content: space-between;
 }
+.btn-bookmark {
+  padding: 10px 20px;
+  background-color: #0d7011;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 2px;
+  display: inline-block;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+}
+
+.btn-bookmark:hover {
+  background-color: #155218;
+}
