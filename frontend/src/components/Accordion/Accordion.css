@@ -75,6 +75,22 @@
   font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
 }
 
+.btn-remove {
+  padding: 10px 20px;
+  background-color: #ea0d0d;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 2px;
+  display: inline-block;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+}
+
+.btn-remove:hover {
+  background-color: #fb4343;
+}
+
 .btn-bookmark:hover {
   background-color: #155218;
 }

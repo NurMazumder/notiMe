@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BookmarkRow from "../BookRow/BookRow";
 import Loading from "../LoadingSpinner/LoadingSpinner";
+import Container from "../Container/Container";
 
 const Bookmarks = () => {
   const [bookmarkList, setBookmarkList] = useState([]);
@@ -36,24 +37,39 @@ const Bookmarks = () => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="flex flex-col items-center">
-          <h2 className="text-2xl font-bold mt-5 mb-4">My Bookmarks</h2>
-          {bookmarkList.length > 0 ? (
-            <ul>
-              {bookmarkList.map((title) => (
-                <li key={title} className="mb-3">
-                  <BookmarkRow title={title} onClick={filterBookmarks} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <h2>You haven't added any bookmarks yet. Find reads you like!</h2>
-          )}
-        </div>
-      )}
+      <Container>
+        <section className="home">
+          <div className="dark-overlay">
+            <div className="home-inner">
+              <h1 className="x-large">Bookmarks</h1>
+              <p style={{ width: "890px" }}>&nbsp;</p>{" "}
+              {/* Adjust the height as needed */}
+              {loading ? (
+                <Loading />
+              ) : (
+                <div>
+                  {bookmarkList.length > 0 ? (
+                    <ul>
+                      {bookmarkList.map((title) => (
+                        <li key={title} className="mb-3">
+                          <BookmarkRow
+                            title={title}
+                            onClick={filterBookmarks}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <h2>
+                      You haven't added any bookmarks yet. Find reads you like!
+                    </h2>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </Container>
     </>
   );
 };
