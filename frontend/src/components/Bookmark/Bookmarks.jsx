@@ -1,52 +1,60 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getBookmarks, removeBookmark } from "../../actions/bookmark";
-import Container from "../Container/Container"; // Make sure this path is correct
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"; // Make sure this path is correct
-import "./Bookmarks.css"; // Ensure you have this CSS file
+import React, { useState, useEffect } from "react";
+import BookmarkRow from "../BookRow/BookRow";
+import Loading from "../LoadingSpinner/LoadingSpinner";
 
 const Bookmarks = () => {
-  const dispatch = useDispatch();
-  const { bookmarks, loading } = useSelector((state) => state.bookmark);
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const [bookmarkList, setBookmarkList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(getBookmarks());
-    }
-  }, [isAuthenticated, dispatch]);
+    const fetchBookmarks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("/api/bookmark/retrieve", {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": token,
+          },
+        });
+        const data = await response.json();
+        setBookmarkList(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBookmarks();
+  }, []);
 
-  const handleRemoveBookmark = (id) => {
-    dispatch(removeBookmark(id));
+  const filterBookmarks = (title) => {
+    const filteredBookmarks = bookmarkList.filter(
+      (bookmarkTitle) => bookmarkTitle !== title
+    );
+    setBookmarkList(filteredBookmarks);
   };
 
   return (
-    <Container>
-      <section className="home">
-        <div className="dark-overlay">
-          <div className="home-inner">
-            <h1 className="x-large">Your Bookmarks</h1>
-            {loading ? (
-              <LoadingSpinner />
-            ) : (
-              <div className="bookmarks-list">
-                {bookmarks.map((bookmark) => (
-                  <div key={bookmark._id} className="bookmark-item">
-                    <h2>{bookmark.title}</h2>
-                    <button
-                      className="btn-demo"
-                      onClick={() => handleRemoveBookmark(bookmark._id)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-bold mt-5 mb-4">My Bookmarks</h2>
+          {bookmarkList.length > 0 ? (
+            <ul>
+              {bookmarkList.map((title) => (
+                <li key={title} className="mb-3">
+                  <BookmarkRow title={title} onClick={filterBookmarks} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <h2>You haven't added any bookmarks yet. Find reads you like!</h2>
+          )}
         </div>
-      </section>
-    </Container>
+      )}
+    </>
   );
 };
 

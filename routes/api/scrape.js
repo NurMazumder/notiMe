@@ -155,4 +155,31 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route   GET api/scrape
+// @desc    Get the scraped data from MongoDB by title
+// @access  Public
+router.get("/title", async (req, res) => {
+  const { title } = req.query;
+
+  if (!title) {
+    return res.status(400).json({ error: "Title query parameter is required" });
+  }
+
+  try {
+    // Decoding the title to handle spaces and special characters
+    const decodedTitle = decodeURIComponent(title);
+
+    const data = await Read.findOne({ title: decodedTitle });
+    if (!data) {
+      return res
+        .status(404)
+        .json({ error: "Data not found for the given title" });
+    }
+    res.json(data);
+  } catch (err) {
+    console.error("Error in retrieving data:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

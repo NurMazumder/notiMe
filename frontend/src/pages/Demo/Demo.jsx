@@ -6,10 +6,10 @@ import { scrapeWebsite } from "../../actions/demo";
 import "./Demo.css";
 import Container from "../../components/Container/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner.jsx";
+import Accordion from "../../components/Accordion/Accordion"; // Import Accordion component
 
 const Demo = () => {
   const [url, setUrl] = useState("");
-  const [isOpen, setIsOpen] = useState(true); // Set the accordion to be open by default
   const dispatch = useDispatch();
   const { chapters, imgURL, title, loading, error } = useSelector(
     (state) => state.demo
@@ -26,10 +26,6 @@ const Demo = () => {
     if (url) {
       dispatch(scrapeWebsite(url));
     }
-  };
-
-  const handleAccordionClick = () => {
-    setIsOpen(!isOpen);
   };
 
   const handleAddToBookmark = async () => {
@@ -85,9 +81,8 @@ const Demo = () => {
               >
                 AsuraScans
               </a>
-              , save them to our database, and where we keep the information
-              updated periodically, so you have the latest chapters. Head over
-              to{" "}
+              , save them to our database, and keep the information updated
+              periodically, so you have the latest chapters. Head over to{" "}
               <a
                 href="https://asuracomic.net/"
                 target="_blank"
@@ -118,72 +113,15 @@ const Demo = () => {
             {/* Render the spinner when loading */}
             {error && <p className="lead">{error}</p>}
             {chapters && Object.keys(chapters).length > 0 && (
-              <div className="demo-results">
-                <div className="accordion">
-                  <div
-                    className="accordion-header"
-                    onClick={handleAccordionClick}
-                  >
-                    <img
-                      src={imgURL}
-                      alt="Manga Cover"
-                      className="accordion-image"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "fallback-image-url.jpg";
-                      }}
-                    />
-                    <h2 className="lead">{title}</h2>
-                    {isAuthenticated ? (
-                      <button
-                        onClick={handleAddToBookmark}
-                        className="btn-bookmark"
-                      >
-                        Add to Bookmark
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() =>
-                          dispatch(
-                            setAlert(
-                              "Please log in to add bookmarks.",
-                              "warning"
-                            )
-                          )
-                        }
-                        className="btn-bookmark"
-                      >
-                        +
-                      </button>
-                    )}
-                  </div>
-                  {isOpen && (
-                    <ul className="accordion-content">
-                      {Object.keys(chapters).map((key, index) => (
-                        <li key={index} className="accordion-item">
-                          <div className="accordion-item-info">
-                            <span className="lead">
-                              {chapters[key].content}
-                            </span>
-                            <span className="lead">
-                              {chapters[key].releaseDate}
-                            </span>
-                            <span className="lead">
-                              <a
-                                href={chapters[key].url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Read here
-                              </a>
-                            </span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
+              <Accordion
+                imgURL={imgURL}
+                title={title}
+                isAuthenticated={isAuthenticated}
+                handleAddToBookmark={handleAddToBookmark}
+                setAlert={setAlert}
+                chapters={chapters}
+                dispatch={dispatch}
+              />
             )}
             {alert && <p className={`alert ${alert.type}`}>{alert.message}</p>}
           </div>

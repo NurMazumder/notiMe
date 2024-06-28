@@ -13,6 +13,7 @@ import Container from "./components/Container/Container";
 import Alert from "./components/Alert/Alert";
 import Demo from "./pages/Demo/Demo";
 import Request from "./pages/Request/Request";
+import Bookmarks from "./components/Bookmark/Bookmarks";
 
 import "./App.css";
 
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/signup" element={<Register />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/request" element={<Request />} />
+              <Route path="/bookmark" element={<Bookmarks />} />
             </Routes>
           </section>
         </>

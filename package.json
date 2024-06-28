@@ -24,7 +24,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.1",
-    "node-cron": "^3.0.3"
+    "node-cron": "^3.0.3",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
