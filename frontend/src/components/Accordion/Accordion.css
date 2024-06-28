@@ -1,0 +1,80 @@
+.lead a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.lead a:hover {
+  text-decoration: underline;
+}
+
+.demo-input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+.btn-demo {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-demo:hover {
+  background-color: #45a049;
+}
+
+.demo-results {
+  margin-top: 20px;
+}
+
+.accordion {
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white; /* Add a white border */
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accordion-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.accordion-content {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion-item {
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.accordion-item-info {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-bookmark {
+  padding: 10px 20px;
+  background-color: #0d7011;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 2px;
+  display: inline-block;
+  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
+}
+
+.btn-bookmark:hover {
+  background-color: #155218;
+}
