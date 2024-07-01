@@ -1,53 +1,21 @@
-.home {
-  display: flex;
-  align-items: flex-start; /* Align items at the top */
-  justify-content: center;
-  padding: 10px 0px;
+.home-inner {
+  width: 100%;
+  max-width: 1200px; /* or any maximum width you prefer */
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bookmarks {
   width: 100%;
 }
 
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border: 1px solid #000;
-  margin-top: 20px; /* Optional: Add margin-top for additional spacing */
+.bookmark-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.home-inner {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border: 1px solid #000;
-}
-
-.x-large {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.lead {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.btn-demo {
-  border-radius: 2px;
-  display: inline-block;
-  font-family: Avenir, lucida grande, tahoma, verdana, arial, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 100%;
-  margin-left: 8px;
-  min-width: 90px;
-  padding: 4px 8px;
-  text-align: center;
-  text-decoration: none;
-  border: none !important;
-  color: #e0e0e0 !important;
-  background-color: #066846 !important;
-}
-.space {
-  width: 900px;
+.mb-3 {
+  margin-bottom: 1rem;
 }

@@ -3,19 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { scrapeWebsite } from "../../actions/demo";
-import "./Demo.css";
+import "../Demo/Demo.css";
 import Container from "../../components/Container/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner.jsx";
+import Bookmarks from "../../components/Bookmark/Bookmarks";
 
-const Demo = () => {
+const Manhwa = () => {
   const [url, setUrl] = useState("");
-  const [isOpen, setIsOpen] = useState(true); // Set the accordion to be open by default
+  const [isOpen, setIsOpen] = useState(true);
+  const [bookmarks, setBookmarks] = useState([]); // State to manage bookmarks
+
   const dispatch = useDispatch();
   const { chapters, imgURL, title, loading, error } = useSelector(
     (state) => state.demo
   );
   const alert = useSelector((state) => state.alert);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Assuming you have an auth slice in your state
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const handleChange = (e) => {
     setUrl(e.target.value);
@@ -49,13 +52,20 @@ const Demo = () => {
           "Content-Type": "application/json",
           "x-auth-token": token,
         },
-        body: JSON.stringify({ readId: title }), // Assuming `title` is the id
+        body: JSON.stringify({ readId: title }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         dispatch(setAlert("Added to bookmark successfully!", "success"));
+        setBookmarks((prevBookmarks) => {
+          // Check if the bookmark already exists
+          if (!prevBookmarks.includes(title)) {
+            return [...prevBookmarks, title];
+          }
+          return prevBookmarks;
+        });
       } else {
         dispatch(setAlert(data.msg || "Failed to add to bookmark.", "warning"));
       }
@@ -66,8 +76,34 @@ const Demo = () => {
   };
 
   useEffect(() => {
-    // This ensures that the component doesn't flicker by only re-rendering when necessary.
-  }, [chapters, imgURL, title, loading, error]);
+    // Fetch existing bookmarks when component mounts
+    const fetchBookmarks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await fetch("/api/bookmark/retrieve", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": token,
+            },
+          });
+          const data = await response.json();
+          if (response.ok) {
+            setBookmarks(data); // Set bookmarks state
+          } else {
+            console.error("Failed to fetch bookmarks:", data.msg);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching bookmarks:", error);
+      }
+    };
+
+    if (isAuthenticated) {
+      fetchBookmarks();
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
@@ -75,10 +111,9 @@ const Demo = () => {
         <section className="home">
           <div className="dark-overlay">
             <div className="home-inner">
-              <h1 className="x-large">Demo</h1>
+              <h1 className="x-large">Manhwa</h1>
               <p className="lead">
-                This demo showcases our ability to scrape the latest manhwa
-                chapters from{" "}
+                This scrape the latest manhwa chapters from{" "}
                 <a
                   href="https://asuracomic.net/"
                   target="_blank"
@@ -95,8 +130,7 @@ const Demo = () => {
                 >
                   AsuraScans
                 </a>{" "}
-                to select your favorite manhwa and copy the URL to demo the
-                scrape.
+                to select your favorite manhwa and copy the URL to scrape.
                 {!isAuthenticated && (
                   <>
                     {" "}
@@ -120,7 +154,6 @@ const Demo = () => {
                 </button>
               </form>
               {loading && <LoadingSpinner />}{" "}
-              {/* Render the spinner when loading */}
               {error && <p className="lead">{error}</p>}
               {chapters && Object.keys(chapters).length > 0 && (
                 <div className="demo-results">
@@ -197,8 +230,11 @@ const Demo = () => {
           </div>
         </section>
       </Container>
+      {isAuthenticated && (
+        <Bookmarks bookmarks={bookmarks} setBookmarks={setBookmarks} /> // Pass bookmarks and setter as props
+      )}
     </>
   );
 };
 
-export default Demo;
+export default Manhwa;
