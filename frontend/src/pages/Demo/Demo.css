@@ -78,3 +78,7 @@
 .btn-bookmark:hover {
   background-color: #155218;
 }
+.sample-url {
+  display: block;
+  margin-top: 10px; /* Adjust the margin as needed */
+}

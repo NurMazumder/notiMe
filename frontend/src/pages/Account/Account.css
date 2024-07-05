@@ -1,0 +1,73 @@
+/* Background styling for authentication section */
+.auth-background_ {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+  min-height: 100vh;
+}
+
+/* Wrapper for the form */
+.form-wrapper_ {
+  background-color: #222;
+  border: 10px solid #353535;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  margin-top: 40px; /* Add margin-top to push the form down */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+}
+
+/* Form title styling */
+.form-title_ {
+  color: #e0e0e0;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px; /* Increase margin-bottom for space */
+}
+
+/* Wrapper for form controls */
+.form-control_ {
+  width: 100%;
+  margin-bottom: 20px; /* Increase margin-bottom for space between controls */
+  color: #899cc9;
+  font-size: 18px; /* Adjust the size as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.form-control_ label {
+  color: #879bd1;
+  margin-bottom: 5px; /* Add some space between label and input */
+  text-align: left; /* Align the label text to the left */
+}
+
+/* Input field styling */
+.form-control_ input {
+  width: calc(100% - 22px); /* Adjust width to fit inside the container */
+  padding: 10px;
+  border: 1px solid #353535;
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 18px; /* Adjust to match the form control text size */
+  border-radius: 4px;
+  margin-top: 5px; /* Add margin-top to create space for the label */
+}
+
+/* Button styling */
+.button_ {
+  background-color: #4065ba;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
+  display: block;
+  width: 100%; /* Align button with input width */
+  margin-top: 20px; /* Add margin-top to create space */
+}

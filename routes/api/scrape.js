@@ -182,4 +182,17 @@ router.get("/title", async (req, res) => {
   }
 });
 
+// @route   GET api/scrape/random
+// @desc    Get 5 random manhwas from MongoDB
+// @access  Public
+router.get("/random", async (req, res) => {
+  try {
+    const randomManhwas = await Read.aggregate([{ $sample: { size: 5 } }]);
+    res.json(randomManhwas);
+  } catch (err) {
+    console.error("Error in retrieving random manhwas:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

@@ -15,6 +15,7 @@ import Demo from "./pages/Demo/Demo";
 import Request from "./pages/Request/Request";
 import Bookmarks from "./components/Bookmark/Bookmarks";
 import Manhwa from "./pages/Manhwa/Manhwa";
+import Account from "./pages/Account/Account";
 
 import "./App.css";
 
@@ -43,6 +44,7 @@ const App = () => {
               <Route path="/request" element={<Request />} />
               <Route path="/bookmark" element={<Bookmarks />} />
               <Route path="/manhwa" element={<Manhwa />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
           </section>
         </>

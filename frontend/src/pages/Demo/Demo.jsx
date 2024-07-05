@@ -97,6 +97,7 @@ const Demo = () => {
                 </a>{" "}
                 to select your favorite manhwa and copy the URL to demo the
                 scrape.
+                <br />
                 {!isAuthenticated && (
                   <>
                     {" "}
@@ -106,6 +107,12 @@ const Demo = () => {
                     to save your favorites and get notified of new releases.
                   </>
                 )}
+                <span className="sample-url">
+                  <strong>Sample URL:</strong>{" "}
+                  <code>
+                    https://asuracomic.net/manga/1908287720-omniscient-readers-viewpoint/
+                  </code>
+                </span>
               </p>
               <form onSubmit={handleSubmit}>
                 <input
