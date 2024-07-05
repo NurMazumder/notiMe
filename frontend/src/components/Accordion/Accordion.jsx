@@ -9,6 +9,7 @@ const Accordion = ({
   setAlert,
   chapters,
   dispatch,
+  handleRemove, // Accept handleRemove as a prop
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,20 +30,11 @@ const Accordion = ({
           }}
         />
         <h2 className="lead">{title}</h2>
-        {isAuthenticated ? (
-          <button onClick={handleAddToBookmark} className="btn-bookmark">
-            Add to Bookmark
-          </button>
-        ) : (
-          <button
-            onClick={() =>
-              dispatch(setAlert("Please log in to add bookmarks.", "warning"))
-            }
-            className="btn-bookmark"
-          >
-            +
-          </button>
-        )}
+
+        <button onClick={handleRemove} className="btn-remove">
+          -
+        </button>
+
         <span className="accordion-toggle-icon">{isOpen ? "-" : "+"}</span>
       </div>
       {isOpen && (

@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://root:root@notime.0hjsr63.mongodb.net/?retryWrites=true&w=majority&appName=notiMe",
+  "jwtSecret": "notiMe"
+}

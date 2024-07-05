@@ -5,19 +5,29 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Accordion from "../Accordion/Accordion";
 
-const BookmarkRow = ({ id, setAlert, onClick, title }) => {
+const BookmarkRow = ({ setAlert, onClick, title, isAuthenticated }) => {
   const [bookmark, setBookmark] = useState(null);
 
   useEffect(() => {
     const fetchBookmark = async () => {
       try {
-        // Replace `title` with the actual title variable you're using
         const encodedTitle = encodeURIComponent(title);
         const response = await fetch(`/api/scrape/title?title=${encodedTitle}`);
         const bookmarkData = await response.json();
 
         if (response.ok) {
-          setBookmark(bookmarkData);
+          // Convert the chapters from the fetched data into an array
+          const chapters = Object.keys(bookmarkData)
+            .filter((key) => key.startsWith("chapter"))
+            .map((key) => bookmarkData[key]);
+
+          // Create a new bookmark object with chapters as an array
+          const transformedBookmark = {
+            ...bookmarkData,
+            chapters: chapters,
+          };
+
+          setBookmark(transformedBookmark);
         } else {
           setAlert(
             bookmarkData.error || "Failed to retrieve bookmark data!",
@@ -34,8 +44,13 @@ const BookmarkRow = ({ id, setAlert, onClick, title }) => {
 
   const handleRemove = async () => {
     try {
-      await axios.delete(`/api/bookmark/delete/${id}`);
-      onClick(id);
+      const token = localStorage.getItem("token");
+      await axios.delete(`/api/bookmark/delete/${encodeURIComponent(title)}`, {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      onClick(title);
       setAlert("Bookmark removed successfully", "success");
     } catch (error) {
       setAlert("Failed to remove bookmark!", "danger");
@@ -46,22 +61,15 @@ const BookmarkRow = ({ id, setAlert, onClick, title }) => {
     <div className="bookmark-row">
       {bookmark && (
         <>
-          <Link to={`/read/${id}`}>
-            <div className="bookmark-row-container">
-              <img
-                src={bookmark.imgURL}
-                alt="Bookmark Image"
-                id="bookmark-row-image"
-              />
-              <h4>{bookmark.title}</h4>
-              <p>Release Date: {bookmark.releaseDate?.substring(0, 10)}</p>
-              <p>Genres: {bookmark.genres?.join(", ")}</p>
-              <p>Platforms: {bookmark.platforms?.join(", ")}</p>
-            </div>
-          </Link>
-          <button id="remove-button" onClick={handleRemove}>
-            Remove
-          </button>
+          <Accordion
+            imgURL={bookmark.imgURL}
+            title={bookmark.title}
+            isAuthenticated={isAuthenticated}
+            setAlert={setAlert}
+            chapters={bookmark.chapters}
+            dispatch={() => {}}
+            handleRemove={handleRemove} // Pass handleRemove as a prop
+          />
         </>
       )}
     </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Container from "../../components/Container/Container";
 import "./HomePage.css";
+import ManhwaCards from "../../components/ManhwaCards/ManhwaCards";
 
 const HomePage = () => {
   return (
@@ -30,6 +31,7 @@ const HomePage = () => {
           </div>
         </section>
       </Container>
+      <ManhwaCards />
     </>
   );
 };
