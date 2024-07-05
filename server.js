@@ -23,7 +23,7 @@ app.use("/api/bookmark", require("./routes/api/bookmark"));
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
   // Adjust the path to correctly serve the static files
-  app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
+  app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
   // Catch-all handler to serve React's index.html for any non-API route
   app.get("*", (req, res) => {
