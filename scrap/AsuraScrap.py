@@ -12,10 +12,16 @@ def scrape(url):
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    
+
     # Use the CHROME_BIN and CHROME_DRIVER_PATH environment variables
-    service = Service(os.getenv("CHROME_DRIVER_PATH"))
-    chrome_options.binary_location = os.getenv("CHROME_BIN")
+    chrome_bin = os.getenv("CHROME_BIN")
+    chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
+
+    if not chrome_bin or not chrome_driver_path:
+        return json.dumps({"error": "Environment variables CHROME_BIN or CHROME_DRIVER_PATH not set"})
+
+    service = Service(chrome_driver_path)
+    chrome_options.binary_location = chrome_bin
 
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
