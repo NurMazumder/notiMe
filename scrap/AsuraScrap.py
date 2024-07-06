@@ -1,25 +1,26 @@
-import requests
+import os
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import json
 import sys
 
 def scrape(url):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'Connection': 'keep-alive',
-        'DNT': '1'
-    }
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    # Use the CHROMEDRIVER_PATH and GOOGLE_CHROME_BIN environment variables
+    service = Service(os.getenv("CHROMEDRIVER_PATH"))
+    chrome_options.binary_location = os.getenv("GOOGLE_CHROME_BIN")
 
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        html_content = response.content
-    except requests.exceptions.RequestException as e:
-        return json.dumps({"error": str(e)})
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
+    driver.get(url)
+    html_content = driver.page_source
     soup = BeautifulSoup(html_content, "html.parser")
 
     def get_last_five_chapters(soup):
@@ -41,6 +42,8 @@ def scrape(url):
         return chapters
 
     last_five_chapters = get_last_five_chapters(soup)
+
+    driver.quit()
 
     if "error" in last_five_chapters:
         return json.dumps(last_five_chapters, indent=4)
