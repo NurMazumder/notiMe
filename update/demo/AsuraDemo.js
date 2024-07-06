@@ -115,7 +115,7 @@ const scrapeAllUrls = async () => {
 
 // Schedule task to run every 2 minutes
 const scheduleScrapes = () => {
-  cron.schedule("*/10 * * * *", () => {
+  cron.schedule("*/59 * * * *", () => {
     console.log("Running scheduled scrape...");
     scrapeAllUrls();
   });
