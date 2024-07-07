@@ -8,21 +8,19 @@ import sys
 
 def scrape(url):
     chrome_options = Options()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    # Use the CHROME_BIN and CHROME_DRIVER_PATH environment variables
-    chrome_bin = os.getenv("CHROME_BIN")
-    chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
+    # Use the CHROMEDRIVER_PATH environment variable
+    chrome_driver_path = os.environ.get("CHROMEDRIVER_PATH")
 
-    if not chrome_bin or not chrome_driver_path:
-        return json.dumps({"error": "Environment variables CHROME_BIN or CHROME_DRIVER_PATH not set"})
+    if not chrome_options.binary_location or not chrome_driver_path:
+        return json.dumps({"error": "Environment variables GOOGLE_CHROME_BIN or CHROMEDRIVER_PATH not set"})
 
     service = Service(chrome_driver_path)
-    chrome_options.binary_location = chrome_bin
-
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     driver.get(url)
@@ -57,6 +55,9 @@ def scrape(url):
     return json.dumps(last_five_chapters, indent=4)
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(json.dumps({"error": "URL argument missing"}))
+        sys.exit(1)
+
     url = sys.argv[1]
     print(scrape(url))
-
