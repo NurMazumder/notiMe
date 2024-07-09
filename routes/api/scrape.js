@@ -45,43 +45,48 @@ router.post("/", async (req, res) => {
     let existingEntry = await Read.findOne({ URL: url });
     if (existingEntry) {
       // If exists, update the existing entry
-      const chapters = await runPythonScript(url);
-      console.log(`Scraped data: ${JSON.stringify(chapters, null, 2)}`);
+      try {
+        const chapters = await runPythonScript(url);
+        console.log(`Scraped data: ${JSON.stringify(chapters, null, 2)}`);
 
-      const cleanedTitle = chapters[0].title.replace("Chapter", "").trim(); // Clean title
+        const cleanedTitle = chapters[0].title.replace("Chapter", "").trim(); // Clean title
 
-      existingEntry.chapter1 = {
-        content: chapters[0].chapter_number,
-        url: chapters[0].link,
-        releaseDate: chapters[0].release_date,
-      };
-      existingEntry.chapter2 = {
-        content: chapters[1].chapter_number,
-        url: chapters[1].link,
-        releaseDate: chapters[1].release_date,
-      };
-      existingEntry.chapter3 = {
-        content: chapters[2].chapter_number,
-        url: chapters[2].link,
-        releaseDate: chapters[2].release_date,
-      };
-      existingEntry.chapter4 = {
-        content: chapters[3].chapter_number,
-        url: chapters[3].link,
-        releaseDate: chapters[3].release_date,
-      };
-      existingEntry.chapter5 = {
-        content: chapters[4].chapter_number,
-        url: chapters[4].link,
-        releaseDate: chapters[4].release_date,
-      };
-      existingEntry.title = cleanedTitle;
-      existingEntry.from = "source";
-      existingEntry.noti = false;
-      existingEntry.imgURL = chapters[0].img_url;
+        existingEntry.chapter1 = {
+          content: chapters[0].chapter_number,
+          url: chapters[0].link,
+          releaseDate: chapters[0].release_date,
+        };
+        existingEntry.chapter2 = {
+          content: chapters[1].chapter_number,
+          url: chapters[1].link,
+          releaseDate: chapters[1].release_date,
+        };
+        existingEntry.chapter3 = {
+          content: chapters[2].chapter_number,
+          url: chapters[2].link,
+          releaseDate: chapters[2].release_date,
+        };
+        existingEntry.chapter4 = {
+          content: chapters[3].chapter_number,
+          url: chapters[3].link,
+          releaseDate: chapters[3].release_date,
+        };
+        existingEntry.chapter5 = {
+          content: chapters[4].chapter_number,
+          url: chapters[4].link,
+          releaseDate: chapters[4].release_date,
+        };
+        existingEntry.title = cleanedTitle;
+        existingEntry.from = "source";
+        existingEntry.noti = false;
+        existingEntry.imgURL = chapters[0].img_url;
 
-      const updatedRead = await existingEntry.save();
-      return res.json(updatedRead);
+        const updatedRead = await existingEntry.save();
+        return res.json(updatedRead);
+      } catch (err) {
+        console.error("Error scraping data, fetching existing entry:", err);
+        return res.json(existingEntry);
+      }
     }
 
     // If not, scrape the website and save the data
@@ -127,7 +132,7 @@ router.post("/", async (req, res) => {
     res.json(savedRead);
   } catch (err) {
     console.error("Error in scraping route:", err);
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err.message });
   }
 });
 
