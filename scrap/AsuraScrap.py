@@ -4,50 +4,43 @@ import json
 import sys
 
 def scrape(url):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'Connection': 'keep-alive',
-        'DNT': '1'
-    }
+    # Make a GET request to fetch the raw HTML content
+    response = requests.get(url)
+    html_content = response.content
 
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        html_content = response.content
-    except requests.exceptions.RequestException as e:
-        return json.dumps({"error": str(e)})
-
+    # Parse the html content
     soup = BeautifulSoup(html_content, "html.parser")
 
+    # Function to extract the last five chapters' details
     def get_last_five_chapters(soup):
         chapters = []
-        try:
-            chapter_list = soup.find('div', class_='eplister').find('ul', class_='clstyle').find_all('li', limit=5)
-            for chapter in chapter_list:
-                chapter_info = {}
-                link_tag = chapter.find('a')
-                chapter_info['title'] = soup.find('div', class_='releases').find('h2').text.strip()
-                chapter_info['link'] = link_tag['href']
-                chapter_info['chapter_number'] = link_tag.find('span', class_='chapternum').text.strip()
-                chapter_info['release_date'] = link_tag.find('span', class_='chapterdate').text.strip()
-                chapter_info['img_url'] = soup.find('div', class_='thumb').find('img')['src']
-                chapters.append(chapter_info)
-        except AttributeError as e:
-            return {"error": "Failed to find elements on the page. The structure might have changed.", "details": str(e)}
+        base_url = "https://asuracomic.net/series/"  # Base URL to prepend
+
+        # Find the title of the manga
+        title = soup.find('div', class_='py-2 px-5 border-b-[1px] border-b-[#A2A2A2]/20').find('h3').text.strip()
+
+        # Find the chapter list (in this case, the relevant divs)
+        chapter_list = soup.find_all('div', class_='pl-4 py-2 border rounded-md group w-full hover:bg-[#343434] cursor-pointer border-[#A2A2A2]/20', limit=5)
+
+        for chapter in chapter_list:
+            chapter_info = {}
+            link_tag = chapter.find('a')
+            chapter_info['title'] = title
+            chapter_info['link'] = base_url + link_tag['href']  # Prepending the base URL
+            chapter_info['chapter_number'] = link_tag.text.strip()
+            chapter_info['release_date'] = chapter.find('h3', class_='text-xs text-[#A2A2A2]').text.strip()
+            chapter_info['img_url'] = soup.find('div', class_='relative col-span-12 sm:col-span-3 space-y-3 px-6 sm:px-0').find('img')['src']
+
+            chapters.append(chapter_info)
 
         return chapters
 
+    # Get the last five chapters
     last_five_chapters = get_last_five_chapters(soup)
 
-    if "error" in last_five_chapters:
-        return json.dumps(last_five_chapters, indent=4)
-
+    # Return the result as a JSON string
     return json.dumps(last_five_chapters, indent=4)
 
 if __name__ == "__main__":
     url = sys.argv[1]
     print(scrape(url))
-
