@@ -110,7 +110,7 @@ const Demo = () => {
                 <span className="sample-url">
                   <strong>Sample URL:</strong>{" "}
                   <code>
-                    https://asuracomic.net/manga/1908287720-omniscient-readers-viewpoint/
+                    https://asuracomic.net/series/omniscient-readers-viewpoint-ba3c69b5
                   </code>
                 </span>
               </p>

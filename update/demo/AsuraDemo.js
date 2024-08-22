@@ -120,4 +120,20 @@ const scheduleScrapes = () => {
   });
 };
 
-module.exports = scheduleScrapes;
+const deleteAllReadDocuments = async () => {
+  try {
+    const result = await Read.deleteMany({});
+    console.log(
+      `Successfully deleted ${result.deletedCount} documents from the Read collection.`
+    );
+  } catch (err) {
+    console.error(
+      `Error deleting documents from Read collection: ${err.message}`
+    );
+  }
+};
+
+module.exports = {
+  scheduleScrapes,
+  deleteAllReadDocuments,
+};
